@@ -1,0 +1,26 @@
+<svg viewBox="0 0 200 200" width="200" height="200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stopColor="#0B40A8" />
+      <stop offset="50%" stopColor="#08358F" />
+      <stop offset="100%" stopColor="#052260" />
+    </linearGradient>
+    <linearGradient id="silverGrad" x1="20%" y1="0%" x2="80%" y2="100%">
+      <stop offset="0%" stopColor="#FFFFFF" />
+      <stop offset="25%" stopColor="#EFF4FA" />
+      <stop offset="50%" stopColor="#D2DFEE" />
+      <stop offset="75%" stopColor="#AFC2DB" />
+      <stop offset="100%" stopColor="#87A0C4" />
+    </linearGradient>
+    <filter id="chShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="4" floodColor="#041433" floodOpacity="0.45" />
+    </filter>
+  </defs>
+  <rect width="200" height="200" rx="36" fill="url(#bgGrad)" />
+  <g filter="url(#chShadow)">
+    <path d="M 142 54 A 86 86 0 1 0 142 146 L 126 132 A 66 66 0 1 1 126 68 Z" fill="url(#silverGrad)" />
+    <path d="M 75 58 L 92 58 L 92 142 L 75 142 Z" fill="url(#silverGrad)" />
+    <path d="M 121 68 L 137 68 L 137 132 L 121 132 Z" fill="url(#silverGrad)" />
+    <path d="M 90 90 L 123 90 L 123 110 L 90 110 Z" fill="url(#silverGrad)" />
+  </g>
+</svg>

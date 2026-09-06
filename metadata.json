@@ -1,0 +1,6 @@
+{
+  "name": "Charte Homes",
+  "description": "Browse, buy, rent, and list verified properties across Ethiopia with Charte Homes.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
