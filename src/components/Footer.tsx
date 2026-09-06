@@ -126,18 +126,10 @@ export const Footer: React.FC<FooterProps> = ({
               </li>
               <li>
                 <button
-                  onClick={() => { onSetMode('rent'); onNavigateHome(); }}
-                  className="hover:text-white transition-colors text-blue-200/80"
-                >
-                  {t.nav_rent}
-                </button>
-              </li>
-              <li>
-                <button
                   onClick={onOpenSell}
-                  className="hover:text-white transition-colors font-medium text-amber-300"
+                  className="hover:text-white transition-colors font-medium text-emerald-300"
                 >
-                  {t.footer_sell_link}
+                  {t.nav_sell}
                 </button>
               </li>
               <li>

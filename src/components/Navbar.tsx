@@ -131,11 +131,11 @@ export const Navbar: React.FC<NavbarProps> = ({
             <CharteLogo size="md" variant="horizontal" theme="blue" />
           </button>
 
-          {/* Desktop Nav Links */}
+          {/* Desktop Nav Links: Buy and Sell Only */}
           <nav className="hidden md:flex items-center gap-1.5 bg-blue-50/80 p-1 rounded-full border border-blue-200">
             <button
               onClick={() => { onSetMode('buy'); onNavigateHome(); }}
-              className={`px-6 py-2 rounded-full text-xs font-semibold uppercase tracking-wider transition-all duration-200 ${
+              className={`px-7 py-2 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-200 ${
                 activeMode === 'buy'
                   ? 'bg-[#1E40AF] text-white shadow-sm'
                   : 'text-[#1E40AF] hover:text-[#0A2244] hover:bg-white/60'
@@ -144,24 +144,10 @@ export const Navbar: React.FC<NavbarProps> = ({
               {t.nav_buy}
             </button>
             <button
-              onClick={() => { onSetMode('rent'); onNavigateHome(); }}
-              className={`px-6 py-2 rounded-full text-xs font-semibold uppercase tracking-wider transition-all duration-200 ${
-                activeMode === 'rent'
-                  ? 'bg-[#1E40AF] text-white shadow-sm'
-                  : 'text-[#1E40AF] hover:text-[#0A2244] hover:bg-white/60'
-              }`}
-            >
-              {t.nav_rent}
-            </button>
-            <button
               onClick={onOpenSell}
-              className={`px-6 py-2 rounded-full text-xs font-semibold uppercase tracking-wider transition-all duration-200 ${
-                activeMode === 'sell'
-                  ? 'bg-[#1E40AF] text-white shadow-sm'
-                  : 'text-[#1E40AF] hover:text-[#0A2244] hover:bg-white/60'
-              }`}
+              className="px-7 py-2 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-200 text-[#1E40AF] hover:text-[#0A2244] hover:bg-white/60"
             >
-              {t.nav_list}
+              {t.nav_sell}
             </button>
           </nav>
 
@@ -198,13 +184,13 @@ export const Navbar: React.FC<NavbarProps> = ({
               </button>
             </div>
 
-            {/* List Property Button */}
+            {/* Sell House CTA Button */}
             <button
               onClick={onOpenSell}
-              className="hidden sm:flex items-center gap-2 bg-gradient-to-r from-[#0A2244] to-[#1E40AF] hover:from-[#061833] hover:to-[#1D4ED8] text-white font-semibold text-xs uppercase tracking-widest px-5 py-2.5 rounded-full shadow-sm transition-all hover:scale-[1.01]"
+              className="hidden sm:flex items-center gap-2 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold text-xs uppercase tracking-widest px-5 py-2.5 rounded-full shadow-sm transition-all hover:scale-[1.01]"
             >
-              <PlusCircle className="w-4 h-4 text-blue-200" />
-              <span>{t.nav_list}</span>
+              <PlusCircle className="w-4 h-4 text-emerald-100" />
+              <span>{t.nav_sell}</span>
             </button>
 
             {/* Admin status pill */}
@@ -237,30 +223,20 @@ export const Navbar: React.FC<NavbarProps> = ({
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
         <div className="md:hidden bg-white border-t border-blue-100 px-4 pt-4 pb-6 space-y-4 animate-in fade-in slide-in-from-top-3 duration-200">
-          <div className="grid grid-cols-3 gap-2">
+          <div className="grid grid-cols-2 gap-2.5">
             <button
               onClick={() => { onSetMode('buy'); onNavigateHome(); setMobileMenuOpen(false); }}
-              className={`py-2.5 text-center text-xs font-semibold uppercase tracking-wider rounded-full ${
-                activeMode === 'buy' ? 'bg-[#1E40AF] text-white shadow-sm' : 'bg-blue-50 text-[#1E40AF]'
+              className={`py-3 text-center text-xs font-bold uppercase tracking-wider rounded-full shadow-xs transition-all ${
+                activeMode === 'buy' ? 'bg-[#1E40AF] text-white shadow-sm' : 'bg-blue-50 text-[#1E40AF] hover:bg-blue-100'
               }`}
             >
               {t.nav_buy}
             </button>
             <button
-              onClick={() => { onSetMode('rent'); onNavigateHome(); setMobileMenuOpen(false); }}
-              className={`py-2.5 text-center text-xs font-semibold uppercase tracking-wider rounded-full ${
-                activeMode === 'rent' ? 'bg-[#1E40AF] text-white shadow-sm' : 'bg-blue-50 text-[#1E40AF]'
-              }`}
-            >
-              {t.nav_rent}
-            </button>
-            <button
               onClick={() => { onOpenSell(); setMobileMenuOpen(false); }}
-              className={`py-2.5 text-center text-xs font-semibold uppercase tracking-wider rounded-full ${
-                activeMode === 'sell' ? 'bg-[#1E40AF] text-white shadow-sm' : 'bg-blue-50 text-[#1E40AF]'
-              }`}
+              className="py-3 text-center text-xs font-bold uppercase tracking-wider rounded-full bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-xs hover:from-emerald-500 hover:to-teal-500 transition-all"
             >
-              {t.nav_list}
+              {t.nav_sell}
             </button>
           </div>
 

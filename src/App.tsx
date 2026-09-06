@@ -199,19 +199,17 @@ export default function App() {
         onOpenDownloadApp={() => setIsDownloadAppOpen(true)}
       />
 
-      {/* Hero Section with Filter Bar */}
+      {/* Hero Section with Buy and Sell Buttons Only */}
       <Hero
         currentLang={currentLang}
         activeMode={activeMode}
         onSetMode={setActiveMode}
-        filters={filters}
-        onFilterChange={handleFilterChange}
-        onClearFilters={handleClearFilters}
+        onOpenSell={() => setIsSellOpen(true)}
         onOpenDownloadApp={() => setIsDownloadAppOpen(true)}
       />
 
       {/* Main Listings Grid */}
-      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <main id="listings-section" className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-12 scroll-mt-6">
         {/* Section Header */}
         <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2 mb-8 pb-4 border-b border-blue-100">
           <div>
@@ -219,7 +217,7 @@ export default function App() {
               className="text-2xl sm:text-3xl font-bold text-[#0A2244] font-serif"
               style={{ fontFamily: "'Fraunces', serif" }}
             >
-              {activeMode === 'rent' ? t.section_for_rent : t.section_for_sale}
+              {t.section_for_sale}
             </h2>
             <p className="text-xs text-slate-500 mt-1">
               Verified properties across Ethiopia by Charte Homes with clear ownership records
