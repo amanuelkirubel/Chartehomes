@@ -6,11 +6,12 @@ import { ListingDetailModal } from './components/ListingDetailModal';
 import { SellListingModal } from './components/SellListingModal';
 import { EditListingModal } from './components/EditListingModal';
 import { AdminModal } from './components/AdminModal';
+import { DownloadAppModal } from './components/DownloadAppModal';
 import { Footer } from './components/Footer';
 import { Listing, FilterState, ViewMode, Language, ListingStatus } from './types';
 import { getStoredListings, saveListingsToStorage } from './data/mockListings';
 import { TRANSLATIONS } from './translations';
-import { Sparkles, Building2, CheckCircle } from 'lucide-react';
+import { Building2, CheckCircle, Download } from 'lucide-react';
 
 export default function App() {
   const [currentLang, setCurrentLang] = useState<Language>(() => {
@@ -33,6 +34,7 @@ export default function App() {
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [editingListing, setEditingListing] = useState<Listing | null>(null);
   const [isAdminOpen, setIsAdminOpen] = useState(false);
+  const [isDownloadAppOpen, setIsDownloadAppOpen] = useState(false);
   const [adminEmail, setAdminEmail] = useState<string | null>(() => {
     return localStorage.getItem('charte_admin_email');
   });
@@ -45,10 +47,12 @@ export default function App() {
     localStorage.setItem('charte_lang', currentLang);
   }, [currentLang]);
 
-  // Check URL hash for admin door (#admin)
+  // Check URL hash for admin door (#admin) or download door (#app)
   useEffect(() => {
     if (window.location.hash === '#admin') {
       setIsAdminOpen(true);
+    } else if (window.location.hash === '#app' || window.location.hash === '#download') {
+      setIsDownloadAppOpen(true);
     }
   }, []);
 
@@ -169,11 +173,11 @@ export default function App() {
   const t = TRANSLATIONS[currentLang];
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#F5F5F0] text-[#2C2C26] font-sans antialiased selection:bg-[#5A5A40] selection:text-white">
+    <div className="min-h-screen flex flex-col bg-[#F8FAFC] text-[#0F172A] font-sans antialiased selection:bg-[#1E40AF] selection:text-white">
       {/* Toast Notification */}
       {toastMessage && (
-        <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 bg-[#2B2B22] text-white px-6 py-3 rounded-full shadow-2xl border border-[#A68B67]/40 flex items-center gap-3 animate-in fade-in slide-in-from-bottom-3 duration-200">
-          <CheckCircle className="w-5 h-5 text-[#A68B67] shrink-0" />
+        <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 bg-[#0A2244] text-white px-6 py-3 rounded-full shadow-2xl border border-blue-400/40 flex items-center gap-3 animate-in fade-in slide-in-from-bottom-3 duration-200">
+          <CheckCircle className="w-5 h-5 text-emerald-400 shrink-0" />
           <span className="text-sm font-semibold tracking-wide">{toastMessage}</span>
         </div>
       )}
@@ -192,6 +196,7 @@ export default function App() {
           handleClearFilters();
           window.scrollTo({ top: 0, behavior: 'smooth' });
         }}
+        onOpenDownloadApp={() => setIsDownloadAppOpen(true)}
       />
 
       {/* Hero Section with Filter Bar */}
@@ -202,27 +207,37 @@ export default function App() {
         filters={filters}
         onFilterChange={handleFilterChange}
         onClearFilters={handleClearFilters}
+        onOpenDownloadApp={() => setIsDownloadAppOpen(true)}
       />
 
       {/* Main Listings Grid */}
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Section Header */}
-        <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2 mb-8 pb-4 border-b border-[#E5E2D9]">
+        <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2 mb-8 pb-4 border-b border-blue-100">
           <div>
             <h2
-              className="text-2xl sm:text-3xl font-bold text-[#1C1C1C] font-serif"
+              className="text-2xl sm:text-3xl font-bold text-[#0A2244] font-serif"
               style={{ fontFamily: "'Fraunces', serif" }}
             >
               {activeMode === 'rent' ? t.section_for_rent : t.section_for_sale}
             </h2>
-            <p className="text-xs text-[#7A786C] mt-1">
-              Verified properties by Charte Homes with clear ownership records
+            <p className="text-xs text-slate-500 mt-1">
+              Verified properties across Ethiopia by Charte Homes with clear ownership records
             </p>
           </div>
 
-          <div className="text-xs font-semibold text-[#5A5A40] bg-[#EAE8DF] px-4 py-1.5 rounded-full border border-[#DCD7CB] shadow-xs">
-            <span>{filteredListings.length}</span>{' '}
-            <span>{filteredListings.length === 1 ? t.count_house_singular : t.count_house_plural}</span>
+          <div className="flex items-center gap-3">
+            <button
+              onClick={() => setIsDownloadAppOpen(true)}
+              className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold text-[#1E40AF] bg-blue-50 border border-blue-200 hover:bg-blue-100 transition-colors"
+            >
+              <Download className="w-3.5 h-3.5" />
+              <span>{t.download_app}</span>
+            </button>
+            <div className="text-xs font-semibold text-[#1E40AF] bg-blue-50 px-4 py-1.5 rounded-full border border-blue-200 shadow-xs">
+              <span>{filteredListings.length}</span>{' '}
+              <span>{filteredListings.length === 1 ? t.count_house_singular : t.count_house_plural}</span>
+            </div>
           </div>
         </div>
 
@@ -240,22 +255,22 @@ export default function App() {
           </div>
         ) : (
           /* Empty State */
-          <div className="bg-white rounded-[32px] p-12 text-center border border-[#E5E2D9] shadow-sm max-w-xl mx-auto space-y-4">
-            <div className="w-16 h-16 rounded-full bg-[#EAE8DF] text-[#5A5A40] flex items-center justify-center mx-auto">
+          <div className="bg-white rounded-3xl p-12 text-center border border-blue-100 shadow-sm max-w-xl mx-auto space-y-4">
+            <div className="w-16 h-16 rounded-full bg-blue-50 text-[#1E40AF] flex items-center justify-center mx-auto">
               <Building2 className="w-8 h-8" />
             </div>
             <h3
-              className="text-xl font-bold text-[#1C1C1C] font-serif"
+              className="text-xl font-bold text-[#0A2244] font-serif"
               style={{ fontFamily: "'Fraunces', serif" }}
             >
               {t.empty_title}
             </h3>
-            <p className="text-sm text-[#7A786C] leading-relaxed">
+            <p className="text-sm text-slate-500 leading-relaxed">
               {t.empty_desc}
             </p>
             <button
               onClick={handleClearFilters}
-              className="px-6 py-3 bg-[#5A5A40] hover:bg-[#484833] text-white text-xs font-bold uppercase tracking-widest rounded-full shadow-sm transition-all"
+              className="px-6 py-3 bg-[#1E40AF] hover:bg-[#1D4ED8] text-white text-xs font-bold uppercase tracking-widest rounded-full shadow-sm transition-all"
             >
               {t.btn_clear}
             </button>
@@ -307,6 +322,18 @@ export default function App() {
         onAdminLogin={handleAdminLogin}
       />
 
+      {/* Download App Modal */}
+      <DownloadAppModal
+        isOpen={isDownloadAppOpen}
+        onClose={() => {
+          setIsDownloadAppOpen(false);
+          if (window.location.hash === '#app' || window.location.hash === '#download') {
+            window.history.replaceState(null, '', window.location.pathname);
+          }
+        }}
+        currentLang={currentLang}
+      />
+
       {/* Footer */}
       <Footer
         currentLang={currentLang}
@@ -317,6 +344,7 @@ export default function App() {
           handleClearFilters();
           window.scrollTo({ top: 0, behavior: 'smooth' });
         }}
+        onOpenDownloadApp={() => setIsDownloadAppOpen(true)}
         isAdmin={!!adminEmail}
       />
     </div>

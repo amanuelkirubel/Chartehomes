@@ -1,0 +1,26 @@
+{
+  "id": "/",
+  "name": "Charte Homes",
+  "short_name": "CharteHomes",
+  "description": "Ethiopian Real Estate Platform - Browse, buy, rent, and list verified homes across Ethiopia.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#0A2244",
+  "theme_color": "#0A2244",
+  "icons": [
+    {
+      "src": "/logo.svg",
+      "sizes": "192x192 512x512",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/logo.svg",
+      "sizes": "192x192 512x512",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ]
+}

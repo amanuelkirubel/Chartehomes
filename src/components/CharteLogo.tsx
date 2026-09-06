@@ -13,7 +13,7 @@ export const CharteLogo: React.FC<CharteLogoProps> = ({
   size = 'md',
   showText = true,
   className = '',
-  theme = 'natural'
+  theme = 'blue'
 }) => {
   // Dimension definitions
   const dimensions = {
